@@ -1,5 +1,5 @@
-module github.com/crap/postfix_regex
+module github.com/aveplen/go-post-regex
 
 go 1.16
 
-require github.com/aveplen/go-weak-stack v0.0.0-20210709173845-e188d0a72ef0
+require github.com/aveplen/go-weak-stack v0.0.2
