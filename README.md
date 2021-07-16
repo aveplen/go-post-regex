@@ -1,1 +1,1 @@
-# go-post-regex
+# Simplest regex engine out there
