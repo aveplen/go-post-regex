@@ -19,15 +19,12 @@ func (ms Multistate) Find(st *state.State) bool {
 	return flag
 }
 
-func AddNextStates(st *state.State, next, visited Multistate) {
-	if len(st.Epsilon) >= 0 {
-		for _, eps := range st.Epsilon {
-			if !visited.Find(eps) {
-				visited = append(visited, eps)
-				AddNextStates(eps, next, visited)
-			}
+func AddNextStates(st *state.State, next, visited *Multistate) {
+	for _, eps := range st.Epsilon {
+		if !visited.Find(eps) {
+			*visited = append(*visited, eps)
+			AddNextStates(eps, next, visited)
 		}
-	} else {
-		next = append(next, st)
 	}
+	*next = append(*next, st)
 }

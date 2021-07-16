@@ -29,12 +29,16 @@ func FromSymbol(symbol rune) *NFA {
 func Concat(first *NFA, second *NFA) *NFA {
 	first.End.AddEpsilon(second.Start)
 	first.End.IsEnd = false
-	return first
+	return &NFA{
+		Start: first.Start,
+		End:   second.End,
+	}
 }
 
 func Union(first *NFA, second *NFA) *NFA {
 	res := New()
 	res.Start = state.New(false)
+	res.End = state.New(true)
 
 	res.Start.AddEpsilon(first.Start)
 	res.Start.AddEpsilon(second.Start)
@@ -42,7 +46,6 @@ func Union(first *NFA, second *NFA) *NFA {
 	first.End.IsEnd = false
 	first.End.AddEpsilon(res.End)
 
-	res.End = state.New(true)
 	second.End.IsEnd = false
 	second.End.AddEpsilon(res.End)
 
