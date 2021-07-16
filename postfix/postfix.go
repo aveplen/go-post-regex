@@ -4,10 +4,6 @@ import (
 	"strings"
 )
 
-func (r Regex) New(s string) Regex {
-	return Regex(s).ExplicitConcat()
-}
-
 func (r Regex) ExplicitConcat() (res Regex) {
 	for i, token := range r {
 		res = res + Regex(token)

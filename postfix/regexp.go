@@ -6,11 +6,6 @@ import (
 	stack "github.com/aveplen/go-post-regex/postfix/stack"
 )
 
-func (rp RegexP) New(r string) RegexP {
-	temp := Regex(r)
-	return temp.ExplicitConcat().ToPostfix()
-}
-
 var presedence = map[rune]int{
 	'(': 0,
 	'|': 1,
