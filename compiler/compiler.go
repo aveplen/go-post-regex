@@ -26,6 +26,18 @@ func Compile(reg p.RegexP) *nfa.NFA {
 				errPanic(err)
 				st.Push(nfa.Closure(top))
 			}
+		case '+':
+			{
+				top, err := st.Pop()
+				errPanic(err)
+				st.Push(nfa.Plus(top))
+			}
+		case '?':
+			{
+				top, err := st.Pop()
+				errPanic(err)
+				st.Push(nfa.Optional(top))
+			}
 		case '|':
 			{
 				right, err := st.Pop()

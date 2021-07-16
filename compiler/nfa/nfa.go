@@ -66,3 +66,32 @@ func Closure(nfa *NFA) *NFA {
 
 	return res
 }
+
+func Optional(nfa *NFA) *NFA {
+	res := New()
+	res.Start = state.New(false)
+	res.End = state.New(true)
+
+	res.Start.AddEpsilon(res.End)
+	res.Start.AddEpsilon(nfa.Start)
+
+	nfa.End.AddEpsilon(res.End)
+	nfa.End.IsEnd = false
+
+	return res
+}
+
+func Plus(nfa *NFA) *NFA {
+	res := New()
+	res.Start = state.New(false)
+	res.End = state.New(true)
+
+	// res.Start.AddEpsilon(res.End)
+	res.Start.AddEpsilon(nfa.Start)
+
+	nfa.End.AddEpsilon(res.End)
+	nfa.End.AddEpsilon(nfa.Start)
+	nfa.End.IsEnd = false
+
+	return res
+}
